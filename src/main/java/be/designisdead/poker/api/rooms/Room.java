@@ -1,31 +1,35 @@
-package be.designisdead.poker.api.be.designisdead.poker.api.handler.rooms;
+package be.designisdead.poker.api.rooms;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.time.LocalDateTime;
-import java.util.Date;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by j.peeters on 05/12/2017.
  */
+@Document
 public class Room {
 
+    @Id
+    private ObjectId _id;
     private Long id;
     private String name;
     private String created;
 
-    public Room(@JsonProperty("id") Long id, @JsonProperty("name") String name, @JsonProperty("createdAt") String createdAt) {
+    public Room(@JsonProperty("id") Long id, @JsonProperty("name") String name) {
         this.id = id;
         this.name = name;
-        this.created = createdAt;
     }
 
-    public Long getId() {
-        return id;
+    @JsonIgnore
+    public ObjectId getId() {
+        return _id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(ObjectId _id) {
+        this._id = _id;
     }
 
     public String getName() {
